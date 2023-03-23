@@ -1,16 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import List from './List';
 import Alert from './Alert';
+import { nanoid } from 'nanoid/non-secure'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './index.css';
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem('list');
+  if (list) {
+    return JSON.parse(list);
+  } else {
+    return []
+  }
+}
+
 function App() {
   const [name, setName] = useState('');
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(list));
+  }, [list]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +55,7 @@ function App() {
     } else {
       showAlert(true, 'success', 'item added to the list');
       const newItem = {
-        id: new Date().getTime().toString(),
+        id: nanoid(10),
         title: name,
         strikethrough: false,
       };
@@ -72,7 +86,11 @@ function App() {
   };
 
   const strikeText = (id, strikethrough) => {
-    showAlert(true, 'danger', `${strikethrough ? 'strikethrough removed' : 'text is crossed out'}`)
+    showAlert(
+      true,
+      'danger',
+      `${strikethrough ? 'strikethrough removed' : 'text is crossed out'}`
+    );
     setList(
       list.map((item) => {
         return item.id === id
@@ -93,6 +111,7 @@ function App() {
             className='grocery'
             placeholder='e.g. buy eggs'
             value={name}
+            maxlength="35"
             onChange={(e) => setName(e.target.value)}
           />
           <button type='submit' className='submit-btn'>
