@@ -6,7 +6,7 @@ const Alert = ({ removeAlert, alert }) => {
     if (show) {
       const timeout = setTimeout(() => {
         removeAlert();
-      }, 2000);
+      }, 3000);
       return () => clearTimeout(timeout);
     }
   }, [alert]);

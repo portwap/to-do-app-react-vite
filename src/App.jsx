@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import List from './List';
 import Alert from './Alert';
-import { nanoid } from 'nanoid/non-secure'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import { nanoid } from 'nanoid/non-secure';
 import './index.css';
 
 const getLocalStorage = () => {
@@ -11,9 +9,11 @@ const getLocalStorage = () => {
   if (list) {
     return JSON.parse(list);
   } else {
-    return []
+    return [];
   }
-}
+};
+
+const maxInputLength = 70;
 
 function App() {
   const [name, setName] = useState('');
@@ -100,6 +100,13 @@ function App() {
     );
   };
 
+  const handleChange = (e) => {
+    if (e.target.value.length >= maxInputLength) {
+      showAlert(true, 'danger', 'Maximum field length is 70 characters');
+    }
+    setName(e.target.value);
+  };
+
   return (
     <section className='section-center'>
       <form className='grocery-form' onSubmit={handleSubmit}>
@@ -111,8 +118,8 @@ function App() {
             className='grocery'
             placeholder='e.g. buy eggs'
             value={name}
-            maxLength={70}
-            onChange={(e) => setName(e.target.value)}
+            maxLength={maxInputLength}
+            onChange={handleChange} // setName(e.target.value.slice(0, 10)) one of the options for limiting the number of characters
           />
           <button type='submit' className='submit-btn'>
             {isEditing ? 'edit' : 'submit'}
