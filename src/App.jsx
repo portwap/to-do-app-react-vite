@@ -104,7 +104,7 @@ function App() {
     if (e.target.value.length >= maxInputLength) {
       showAlert(true, 'danger', 'Maximum field length is 70 characters');
     }
-    setName(e.target.value);
+    setName(e.target.value.slice(0, maxInputLength));
   };
 
   return (
@@ -118,8 +118,8 @@ function App() {
             className='grocery'
             placeholder='e.g. buy eggs'
             value={name}
-            maxLength={maxInputLength}
-            onChange={handleChange} // setName(e.target.value.slice(0, 10)) one of the options for limiting the number of characters
+            // maxLength={maxInputLength} one of the options for limiting the number of characters
+            onChange={handleChange}
           />
           <button type='submit' className='submit-btn'>
             {isEditing ? 'edit' : 'submit'}
