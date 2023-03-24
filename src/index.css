@@ -260,19 +260,21 @@ Grocery List
 }
 .title {
   margin-bottom: 0;
+  margin-right: 0.5rem;
   color: var(--clr-grey-1);
   letter-spacing: 2px;
   transition: var(--transition);
-  /* word-break: break-word;  */
+  word-break: break-word; 
 }
 .btn-container {
+  min-width: 4.1rem;
 }
 .edit-btn,
 .delete-btn, .strikethrough-btn {
   background: transparent;
   border-color: transparent;
   cursor: pointer;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   margin: 0 0.15rem;
   transition: var(--transition);
 }

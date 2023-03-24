@@ -111,7 +111,7 @@ function App() {
             className='grocery'
             placeholder='e.g. buy eggs'
             value={name}
-            maxlength="35"
+            maxLength={70}
             onChange={(e) => setName(e.target.value)}
           />
           <button type='submit' className='submit-btn'>
