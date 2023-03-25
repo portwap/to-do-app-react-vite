@@ -199,7 +199,7 @@ Grocery List
   position: relative; /* because nested .alert position: absolute */
 }
 .grocery-form h3 {
-  padding-top: 25px; /* empty space for alerts which is absolute positioned */
+  padding-top: 30px; /* empty space for alerts which is absolute positioned */
   color: var(--clr-primary-1);
   margin-bottom: 1.5rem;
   text-align: center;
